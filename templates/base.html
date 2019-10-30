@@ -1,4 +1,4 @@
-{%load static%}
+{% load static %}
 <!DOCTYPE html>
 <html class="has-navbar-fixed-top has-background-grey-lighter is-family-sans-serif">
 
@@ -11,58 +11,18 @@
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </head>
 
-<nav class="navbar is-fixed-top is-black" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-        <a class="navbar-item" href="{% url 'home' %}">
-            <img src="{% static '/img/logo.png' %}" width="112" height="28">
-        </a>
-
-        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
-            data-target="navbarBasicExample">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-        </a>
-    </div>
-
-    <div id="navbarBasicExample" class="navbar-menu">
-        <div class="navbar-start">
-            <a class="navbar-item">
-                Eventos
-            </a>
-            <a class="navbar-item">
-                Usuarios
-            </a>
-            <a class="navbar-item">
-                Entradas
-            </a>
-        </div>
-
-        <div class="navbar-end">
-            <div class="navbar-item">
-                <div class="buttons">
-                    <a class="button is-danger">
-                        ¡Regístrate!
-                    </a>
-                    <a class="button is-dark">
-                        Iniciar Sesión
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</nav>
+{% include "navbar.html" %}
 
 <body>
-    <section class="section ">
-        {% block contenido %}
-        
-        {% endblock contenido %}
-    </section>
-</body>
+    {% block contenido %}
 
+    {% endblock contenido %}
+
+    {% include "footer.html" %}
+
+</body>
 {% block js %}
 
 {% endblock js %}
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 </html>
