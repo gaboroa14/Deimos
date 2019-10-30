@@ -1,0 +1,19 @@
+@charset "utf-8";
+
+// Import a Google Font
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Nunito|Quicksand|Oxygen&display=swap');
+
+// Update Bulma's global variables
+$family-sans-serif: "Oxygen", sans-serif;
+$family-primary: "Montserrat", sans-serif;
+$family-secondary: "Quicksand", sans-serif;
+$body-family: $family-sans-serif;
+
+$primary: #f03a47;
+$link: #a77464;
+$success: #a0db81;
+$warning: #f2c078;
+$danger: #84111a;
+
+// Import only what you need from Bulma
+@import "../../node_modules/bulma/bulma.sass";

@@ -1,13 +1,13 @@
 {%load static%}
 <!DOCTYPE html>
-<html class="has-navbar-fixed-top has-background-grey-lighter">
+<html class="has-navbar-fixed-top has-background-grey-lighter is-family-sans-serif">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Deimos - ¡Compra tus entradas para tus eventos!</title>
     <link rel="icon" type="image/png" href="{% static 'img/icono.png' %}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    <link rel="stylesheet" href="{% static 'css/bulma_deimos.css' %}">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </head>
 
@@ -42,9 +42,9 @@
             <div class="navbar-item">
                 <div class="buttons">
                     <a class="button is-danger">
-                        <strong>¡Regístrate!</strong>
+                        ¡Regístrate!
                     </a>
-                    <a class="button is-light">
+                    <a class="button is-dark">
                         Iniciar Sesión
                     </a>
                 </div>
