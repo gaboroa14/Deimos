@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+<section class="hero is-link is-bold">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title is-family-primary">
+                Usuarios en el sistema.
+            </h1>
+            <h2 class="subtitle is-family-secondary has-text-justified">
+                A continuación, un listado de usuarios que están registrados actualmente en el sistema.
+            </h2>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <table class="table is-striped is-hoverable is-fullwidth">
+            <thead class="has-background-dark">
+                <th class="has-background-dark has-text-white has-text-centered">Nombre de usuario</th>
+                <th class="has-background-dark has-text-white has-text-centered">Nombre</th>
+                <th class="has-background-dark has-text-white has-text-centered">Apellido</th>
+                <th class="has-background-dark has-text-white has-text-centered">Opciones</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="has-text-centered">azrael42</td>
+                    <td class="has-text-centered">Lucifer</td>
+                    <td class="has-text-centered">Morningstar</td>
+                    <td class="has-text-centered">
+                        <a class="button is-primary">Ver</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock contenido %}

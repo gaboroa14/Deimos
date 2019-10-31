@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+<section class="hero is-warning is-bold">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title is-family-primary">
+                Procesar entrada
+            </h1>
+            <h2 class="subtitle is-family-secondary has-text-justified">
+                Registra acá la asistencia al evento de parte de un usuario.
+            </h2>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="columns is-6 is-centered">
+            <div class="box has-text-centered">
+                <div class="title is-5 is-family-secondary">
+                    Sube un código QR a continuación.
+                </div>
+                <div class="input">
+                    <input type="file">
+                    </input>
+                </div>
+                <div class="has-text-centered">
+                <br/>
+                    <a class="button is-primary is-rounded">
+                        Verificar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock contenido %}

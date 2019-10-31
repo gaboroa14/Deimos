@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 
 {% block contenido %}
-<section class="hero is-primary is-bold">
+<section class="hero is-danger is-bold">
   <div class="hero-body">
     <div class="container">
       <h1 class="title is-family-primary">
         ¡Bienvenido a Deimos!
       </h1>
-      <h2 class="subtitle is-family-secondary">
+      <h2 class="subtitle is-family-secondary has-text-justified">
         Deimos es tu sistema de compra de entradas en línea. Registra tu participación, cancela tu entrada y obtén un
         código QR para acceder al evento. Rápido, eficiente y ecológico. Eso es Deimos.
       </h2>
@@ -22,7 +22,7 @@
 
       <div class="tile is-4 is-parent">
         <div class="box">
-          <article class="tile is-child" style="height: 78%;">
+          <article class="tile is-child has-text-justified" style="height: 78%;">
             <div class="subtitle is-family-secondary"><strong>TEDxUCLA</strong></div>
             <p>Maravilloso ciclo de charlas organizado por estudiantes de la UCLA.</p>
             <p><strong>Lugar: </strong>UCLA-DCyT. Aula PEN-1.</p>
@@ -33,7 +33,7 @@
           
           <div class="has-text-centered" style="height: 22%;">
             <br />
-            <a class="button is-primary">Comprar</a>
+            <a class="button is-primary" onclick="javascript:comprarEntrada(1);">Comprar</a>
             <a class="button is-success">Compartir</a>
           </div>
         </div>
@@ -41,7 +41,7 @@
 
       <div class="tile is-4 is-parent">
         <div class="box">
-          <article class="tile is-child" style="height: 78%;">
+          <article class="tile is-child has-text-justified" style="height: 78%;">
             <div class="subtitle is-family-secondary"><strong>¿Vale la pena irse del país?</strong></div>
             <p>José Ignacio Benítez nos trae a una interesante charla donde nos responderá la incógnita más grande de la
               historia: ¿vale la pena irse de Venezuela?.</p>
@@ -53,7 +53,7 @@
       
           <div class="has-text-centered" style="height: 22%;">
             <br />
-            <a class="button is-primary">Comprar</a>
+            <a class="button is-primary" onclick="javascript:comprarEntrada(1);">Comprar</a>
             <a class="button is-success">Compartir</a>
           </div>
         </div>
@@ -61,7 +61,7 @@
 
       <div class="tile is-4 is-parent">
         <div class="box">
-          <article class="tile is-child" style="height: 78%;">
+          <article class="tile is-child has-text-justified" style="height: 78%;">
             <div class="subtitle is-family-secondary"><strong>Tres divorcios y un funeral.</strong></div>
             <p>La nueva película de Nelson Bustamante ya está aquí. ¡Divertida hasta para morirse de la risa!</p>
             <p><strong>Lugar: </strong>Cine Rialto.</p>
@@ -72,7 +72,7 @@
       
           <div class="has-text-centered" style="height: 22%;">
             <br />
-            <a class="button is-primary">Comprar</a>
+            <a class="button is-primary" onclick="javascript:comprarEntrada(1);">Comprar</a>
             <a class="button is-success">Compartir</a>
           </div>
         </div>
@@ -80,7 +80,7 @@
 
       <div class="tile is-4 is-parent">
         <div class="box">
-          <article class="tile is-child" style="height: 78%;">
+          <article class="tile is-child has-text-justified" style="height: 78%;">
             <div class="subtitle is-family-secondary"><strong>Espadas y Sandalias.</strong></div>
             <p>¿Tienes lo necesario para vencer a Iosif, el Rey de los Dragones? Ponte tus sandalias, toma tu espada y ven
               a jugar rol con el DM Marco Padua.</p>
