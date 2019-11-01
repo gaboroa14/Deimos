@@ -1,0 +1,201 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+<section class="section">
+    <div class="container">
+        <h1 class="title is-family-primary">Eventos actuales</h1>
+
+        <div class="tile is-ancestor" style="flex-wrap: wrap;">
+
+            <div class="tile is-4 is-parent">
+                <div class="box">
+                    <article class="tile is-child has-text-justified" style="height: 85%;">
+                        <div class="subtitle is-family-secondary">
+                            <strong>TEDxUCLA</strong>
+                        </div>
+                        <p>
+                            Maravilloso ciclo de charlas organizado por estudiantes de la UCLA.
+                        </p>
+                        <p>
+                            <strong>Lugar: </strong>UCLA-DCyT. Aula PEN-1.
+                        </p>
+                        <p>
+                            <strong>Fecha: </strong>01/12/2019.
+                        </p>
+                        <p>
+                            <strong>Hora: </strong>08:00 a.m.
+                        </p>
+                        <p>
+                            <strong>Precio: </strong>$5.
+                        </p>
+                        <hr/>
+                        <p>
+                            <strong>Capacidad Máxima Permitida: </strong>105.
+                        </p>
+                        <p>
+                            <strong>Entradas Disponibles: </strong>100.
+                        </p>
+                        <p class="is-centered">
+                            <strong>Entradas Vendidas: </strong>5.
+                            <a class="button is-warning is-small">Ver</a>
+                        </p>
+                        <p>
+                            <strong>Total Recaudado: </strong>100.
+                        </p>
+                    </article>
+
+                    <div class="has-text-centered" style="height: 15%;">
+                        <br/>
+                        <a class="button is-info" onclick="javascript:modificarEvento();">Modificar</a>
+                        <a class="button is-primary" onclick="javascript:eliminarEvento();">Eliminar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tile is-4 is-parent">
+                <div class="box">
+                    <article class="tile is-child has-text-justified" style="height: 78%;">
+                        <div class="subtitle is-family-secondary"><strong>¿Vale la pena irse del país?</strong></div>
+                        <p>José Ignacio Benítez nos trae a una interesante charla donde nos responderá la incógnita más
+                            grande de la
+                            historia: ¿vale la pena irse de Venezuela?.</p>
+                        <p><strong>Lugar: </strong>Teatro Juarez.</p>
+                        <p><strong>Fecha: </strong>21/01/2020.</p>
+                        <p><strong>Hora: </strong>07:00 p.m.</p>
+                        <p><strong>Precio: </strong>$8.</p>
+                    </article>
+
+                    <div class="has-text-centered" style="height: 22%;">
+                        <br />
+                        <a class="button is-primary" onclick="javascript:eliminarEvento();">Comprar</a>
+                        <a class="button is-success">Compartir</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tile is-4 is-parent">
+                <div class="box">
+                    <article class="tile is-child has-text-justified" style="height: 78%;">
+                        <div class="subtitle is-family-secondary"><strong>Tres divorcios y un funeral.</strong></div>
+                        <p>La nueva película de Nelson Bustamante ya está aquí. ¡Divertida hasta para morirse de la
+                            risa!</p>
+                        <p><strong>Lugar: </strong>Cine Rialto.</p>
+                        <p><strong>Fecha: </strong>20/04/2020.</p>
+                        <p><strong>Hora: </strong>03:00 p.m.</p>
+                        <p><strong>Precio: </strong>Bs 45.000</p>
+                    </article>
+
+                    <div class="has-text-centered" style="height: 22%;">
+                        <br />
+                        <a class="button is-primary" onclick="javascript:comprarEntrada(1);">Comprar</a>
+                        <a class="button is-success">Compartir</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tile is-4 is-parent">
+                <div class="box">
+                    <article class="tile is-child has-text-justified" style="height: 78%;">
+                        <div class="subtitle is-family-secondary"><strong>Espadas y Sandalias.</strong></div>
+                        <p>¿Tienes lo necesario para vencer a Iosif, el Rey de los Dragones? Ponte tus sandalias, toma
+                            tu espada y ven
+                            a jugar rol con el DM Marco Padua.</p>
+                        <p><strong>Lugar: </strong>UCLA-DCyT. Club de Ajedrez.</p>
+                        <p><strong>Fecha: </strong>10/11/2019.</p>
+                        <p><strong>Hora: </strong>12:00 p.m.</p>
+                        <p><strong>Precio: </strong>¡Gratis!</p>
+                    </article>
+
+                    <div class="has-text-centered" style="height: 22%;">
+                        <br />
+                        <a class="button is-primary">Comprar</a>
+                        <a class="button is-success">Compartir</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+</section>
+
+<div class="modal" id="modal-modE">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title has-text-centered">Modificar Evento</p>
+        </header>
+        <section class="modal-card-body">
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label">Nombre:</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <p class="control">
+                            <input class="input" type="text" />
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label">Fecha: </label>
+                </div>
+                <div class="field-body" >
+                    <div class="field">
+                        <p class="control">
+                            <input class="input" type="number" />
+                        </p>
+                    </div>
+                </div>
+
+                <div class="field-label is-normal">
+                    <label class="label">Hora:</label>
+                </div>
+                <div class="field-body" >
+                    <div class="field">
+                        <p class="control">
+                            <input class="input" type="number" />
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label">Precio:</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <p class="control">
+                            <input class="input" type="number" />
+                        </p>
+                    </div>
+                </div>
+
+                <div class="field-label is-small">
+                    <label class="label">Aforo Máximo:</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <p class="control">
+                            <input class="input" type="number" />
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Descripción:</label>
+                <div class="control">
+                    <textarea class="textarea" placeholder="Descripción"></textarea>
+                </div>
+            </div>
+        </section>
+        <footer class="modal-card-foot">
+            <a class="button is-success" onclick="javascript:aceptarModE();">Guardar</a>
+            <a class="button is-primary" onclick="javascript:$('#modal-modE').removeClass('is-active');">Cancelar</a>
+        </footer>
+    </div>
+</div>
+{% endblock %}

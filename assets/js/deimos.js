@@ -13,6 +13,28 @@ function comprarEntrada(evento){
     )
 }
 
+function eliminarEvento() {
+    Swal.fire({
+        title: "Eliminar Evento",
+        text: "¿Seguro de eliminar el Evento?",
+        type: "question",
+        showConfirmButton: true,
+        showCancelButton: true,
+        confirmButtonColor: '#a0db81',
+        cancelButtonColor: '#f03a47',
+        confirmButtonText: 'Aceptar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.value){
+            swalExito();
+        }
+    });
+}
+
+function modificarEvento() {
+    $('#modal-modE').addClass('is-active');
+}
+
 function swalAjaxInput(titulo, texto, tipo, input, placeholder, ajax){
     Swal.fire({
         title: titulo,
@@ -38,6 +60,25 @@ function swalAjaxInput(titulo, texto, tipo, input, placeholder, ajax){
             ajax();
         }
     });
+}
+
+function aceptarModE() {
+    Swal.fire({
+        title: "Modificar Evento",
+        text: "¿Seguro de relizar esta modificación?",
+        type: "question",
+        showConfirmButton: true,
+        showCancelButton: true,
+        confirmButtonColor: '#a0db81',
+        cancelButtonColor: '#f03a47',
+        confirmButtonText: 'Aceptar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.value) {
+            $('#modal-modE').removeClass('is-active');
+            swalExito();
+        }
+    });  
 }
 
 function swalExito(){
