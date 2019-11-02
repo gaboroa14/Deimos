@@ -1,10 +1,30 @@
-{% extends "base.html" %}
+{% extends "base/base.html" %}
 
 {% block contenido %}
+<section class="hero is-primary is-bold">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title is-family-primary">
+                Administrador de Eventos
+            </h1>
+            <h2 class="subtitle is-family-secondary has-text-justified">
+                A continuación podrás registrar, consultar, modificar y eliminar los eventos que desees.
+            </h2>
+        </div>
+    </div>
+</section>
 <section class="section">
     <div class="container">
-        <h1 class="title is-family-primary">Eventos actuales</h1>
-
+        <h1 class="title is-family-primary">Eventos
+            <button class="button is-big is-pulled-right is-primary is-rounded is-medium has-tooltip-link"
+                data-tooltip="Crear evento nuevo">
+                <span class="icon is-small">
+                    <i class="fas fa-plus fa-lg">
+                    </i>
+                </span>
+            </button>
+        </h1>
+        <br />
         <div class="tile is-ancestor" style="flex-wrap: wrap;">
 
             <div class="tile is-4 is-parent">
@@ -28,7 +48,7 @@
                         <p>
                             <strong>Precio: </strong>$5.
                         </p>
-                        <hr/>
+                        <hr />
                         <p>
                             <strong>Capacidad Máxima Permitida: </strong>105.
                         </p>
@@ -45,7 +65,7 @@
                     </article>
 
                     <div class="has-text-centered" style="height: 15%;">
-                        <br/>
+                        <br />
                         <a class="button is-info" onclick="javascript:modificarEvento();">Modificar</a>
                         <a class="button is-primary" onclick="javascript:eliminarEvento();">Eliminar</a>
                     </div>
@@ -120,8 +140,8 @@
 <div class="modal" id="modal-modE">
     <div class="modal-background"></div>
     <div class="modal-card">
-        <header class="modal-card-head">
-            <p class="modal-card-title has-text-centered">Modificar Evento</p>
+        <header class="modal-card-head has-background-danger">
+            <p class="modal-card-title has-text-centered has-text-white">Modificar Evento</p>
         </header>
         <section class="modal-card-body">
             <div class="field is-horizontal">
@@ -141,7 +161,7 @@
                 <div class="field-label is-normal">
                     <label class="label">Fecha: </label>
                 </div>
-                <div class="field-body" >
+                <div class="field-body">
                     <div class="field">
                         <p class="control">
                             <input class="input" type="number" />
@@ -152,7 +172,7 @@
                 <div class="field-label is-normal">
                     <label class="label">Hora:</label>
                 </div>
-                <div class="field-body" >
+                <div class="field-body">
                     <div class="field">
                         <p class="control">
                             <input class="input" type="number" />
@@ -192,9 +212,11 @@
                 </div>
             </div>
         </section>
-        <footer class="modal-card-foot">
-            <a class="button is-success" onclick="javascript:aceptarModE();">Guardar</a>
-            <a class="button is-primary" onclick="javascript:$('#modal-modE').removeClass('is-active');">Cancelar</a>
+        <footer class="modal-card-foot has-background-light">
+            <div class="has-text-centered">
+                <a class="button is-success" onclick="javascript:aceptarModE();">Guardar</a>
+                <a class="button is-primary" onclick="javascript:$('#modal-modE').removeClass('is-active');">Cancelar</a>
+            </div>
         </footer>
     </div>
 </div>

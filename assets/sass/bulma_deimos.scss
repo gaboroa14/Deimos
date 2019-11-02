@@ -17,3 +17,7 @@ $danger: #84111a;
 
 // Import only what you need from Bulma
 @import "../../node_modules/bulma/bulma.sass";
+
+$tooltip-font-size: $size-5;
+
+@import "../../node_modules/bulma-tooltip/src/sass/index.sass";

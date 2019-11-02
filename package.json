@@ -14,5 +14,9 @@
   "devDependencies": {
     "bulma": "^0.8.0",
     "node-sass": "^4.13.0"
+  },
+  "dependencies": {
+    "bulma-extensions": "^6.2.7",
+    "bulma-tooltip": "^3.0.2"
   }
 }
