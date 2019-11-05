@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'apps.eventos',
-    'apps.qr',
 ]
 
 MIDDLEWARE = [
@@ -68,6 +67,8 @@ TEMPLATES = [
         },
     },
 ]
+
+AUTH_USER_MODEL = 'eventos.Usuario'
 
 WSGI_APPLICATION = 'deimos.wsgi.application'
 
