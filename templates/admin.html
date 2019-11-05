@@ -15,9 +15,10 @@
 </section>
 <section class="section">
     <div class="container">
+        {% if object_list %}
         <h1 class="title is-family-primary">Eventos
             <button class="button is-big is-pulled-right is-primary is-rounded is-medium has-tooltip-link"
-                data-tooltip="Crear evento nuevo">
+                data-tooltip="Crear evento nuevo" onclick="javascript:registrarEvento();">
                 <span class="icon is-small">
                     <i class="fas fa-plus fa-lg">
                     </i>
@@ -26,31 +27,31 @@
         </h1>
         <br />
         <div class="tile is-ancestor" style="flex-wrap: wrap;">
-
+        {% for evento in object_list %}
             <div class="tile is-4 is-parent">
                 <div class="box">
                     <article class="tile is-child has-text-justified" style="height: 85%;">
                         <div class="subtitle is-family-secondary">
-                            <strong>TEDxUCLA</strong>
+                            <strong>{{evento.nombre}}</strong>
                         </div>
                         <p>
-                            Maravilloso ciclo de charlas organizado por estudiantes de la UCLA.
+                            {{evento.descripcion}}
                         </p>
                         <p>
-                            <strong>Lugar: </strong>UCLA-DCyT. Aula PEN-1.
+                            <strong>Lugar: </strong>{{evento.lugar}}
                         </p>
                         <p>
-                            <strong>Fecha: </strong>01/12/2019.
+                            <strong>Fecha: </strong>{{evento.fecha}}
                         </p>
                         <p>
-                            <strong>Hora: </strong>08:00 a.m.
+                            <strong>Hora: </strong>{{evento.hora|time:"h:i a"}}
                         </p>
                         <p>
-                            <strong>Precio: </strong>$5.
+                            <strong>Precio: </strong>Bs. {{evento.precio}}
                         </p>
                         <hr />
                         <p>
-                            <strong>Capacidad Máxima Permitida: </strong>105.
+                            <strong>Capacidad Máxima Permitida: </strong>{{evento.aforo}}.
                         </p>
                         <p>
                             <strong>Entradas Disponibles: </strong>100.
@@ -71,70 +72,13 @@
                     </div>
                 </div>
             </div>
-
-            <div class="tile is-4 is-parent">
-                <div class="box">
-                    <article class="tile is-child has-text-justified" style="height: 78%;">
-                        <div class="subtitle is-family-secondary"><strong>¿Vale la pena irse del país?</strong></div>
-                        <p>José Ignacio Benítez nos trae a una interesante charla donde nos responderá la incógnita más
-                            grande de la
-                            historia: ¿vale la pena irse de Venezuela?.</p>
-                        <p><strong>Lugar: </strong>Teatro Juarez.</p>
-                        <p><strong>Fecha: </strong>21/01/2020.</p>
-                        <p><strong>Hora: </strong>07:00 p.m.</p>
-                        <p><strong>Precio: </strong>$8.</p>
-                    </article>
-
-                    <div class="has-text-centered" style="height: 22%;">
-                        <br />
-                        <a class="button is-primary" onclick="javascript:eliminarEvento();">Comprar</a>
-                        <a class="button is-success">Compartir</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tile is-4 is-parent">
-                <div class="box">
-                    <article class="tile is-child has-text-justified" style="height: 78%;">
-                        <div class="subtitle is-family-secondary"><strong>Tres divorcios y un funeral.</strong></div>
-                        <p>La nueva película de Nelson Bustamante ya está aquí. ¡Divertida hasta para morirse de la
-                            risa!</p>
-                        <p><strong>Lugar: </strong>Cine Rialto.</p>
-                        <p><strong>Fecha: </strong>20/04/2020.</p>
-                        <p><strong>Hora: </strong>03:00 p.m.</p>
-                        <p><strong>Precio: </strong>Bs 45.000</p>
-                    </article>
-
-                    <div class="has-text-centered" style="height: 22%;">
-                        <br />
-                        <a class="button is-primary" onclick="javascript:comprarEntrada(1);">Comprar</a>
-                        <a class="button is-success">Compartir</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tile is-4 is-parent">
-                <div class="box">
-                    <article class="tile is-child has-text-justified" style="height: 78%;">
-                        <div class="subtitle is-family-secondary"><strong>Espadas y Sandalias.</strong></div>
-                        <p>¿Tienes lo necesario para vencer a Iosif, el Rey de los Dragones? Ponte tus sandalias, toma
-                            tu espada y ven
-                            a jugar rol con el DM Marco Padua.</p>
-                        <p><strong>Lugar: </strong>UCLA-DCyT. Club de Ajedrez.</p>
-                        <p><strong>Fecha: </strong>10/11/2019.</p>
-                        <p><strong>Hora: </strong>12:00 p.m.</p>
-                        <p><strong>Precio: </strong>¡Gratis!</p>
-                    </article>
-
-                    <div class="has-text-centered" style="height: 22%;">
-                        <br />
-                        <a class="button is-primary">Comprar</a>
-                        <a class="button is-success">Compartir</a>
-                    </div>
-                </div>
-            </div>
-
+        {% endfor %}
         </div>
+        {% else %}
+        <h1 class="title is-family-primary">En este momento no hay eventos registrados. ¿Y si registras uno? :-)
+        </h1>
+        {% endif %}
+    </div>
 </section>
 
 <div class="modal" id="modal-modE">
@@ -215,7 +159,109 @@
         <footer class="modal-card-foot has-background-light">
             <div class="has-text-centered">
                 <a class="button is-success" onclick="javascript:aceptarModE();">Guardar</a>
-                <a class="button is-primary" onclick="javascript:$('#modal-modE').removeClass('is-active');">Cancelar</a>
+                <a class="button is-primary"
+                    onclick="javascript:$('#modal-modE').removeClass('is-active');">Cancelar</a>
+            </div>
+        </footer>
+    </div>
+</div>
+
+<div class="modal" id="modal-regE">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head has-background-danger">
+            <p class="modal-card-title has-text-centered has-text-white">Registrar Evento</p>
+        </header>
+        <section class="modal-card-body">
+            <form id="regE">
+                {% csrf_token %}
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal  has-text-left">
+                        <label class="label">Nombre:</label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <p class="control">
+                                <input class="input" type="text" id="nombRE" required />
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        <label class="label">Fecha: </label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <p class="control">
+                                <input class="input" type="date" id="fechRE" required />
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="field-label is-normal">
+                        <label class="label">Hora:</label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <p class="control">
+                                <input class="input" type="time" id="horRE" required />
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal has-text-left">
+                        <label class="label">Lugar:</label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <p class="control">
+                                <input class="input" type="text" id="lugRE" required />
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        <label class="label">Precio:</label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <p class="control">
+                                <input class="input" type="number" id="precRE" required />
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="field-label is-small">
+                        <label class="label">Aforo Máximo:</label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <p class="control">
+                                <input class="input" type="number" id="afRE" required />
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Descripción:</label>
+                    <div class="control">
+                        <textarea class="textarea" placeholder="Descripción" id="descRE" required></textarea>
+                    </div>
+                </div>
+            </form>
+        </section>
+        <footer class="modal-card-foot has-background-light">
+            <div class="has-text-centered">
+                <a type="submit" class="button is-success" onclick="javascript:aceptarRegE();">Guardar</a>
+                <a class="button is-primary"
+                    onclick="javascript:$('#modal-regE').removeClass('is-active');">Cancelar</a>
             </div>
         </footer>
     </div>

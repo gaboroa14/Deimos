@@ -50,11 +50,13 @@ class Usuario_Organizacion(models.Model):
     puesto = models.CharField(max_length=50)
 
 class Evento(models.Model):
+    nombre = models.CharField(max_length=100)
     fecha = models.DateField()
     hora = models.TimeField()
     lugar = models.CharField(max_length=25)
     aforo = models.IntegerField()
     precio = models.FloatField()
+    descripcion = models.CharField(max_length=500)
     ESTATUS_EVENTO = (
         ('P','Preventa'),
         ('V','Venta'),

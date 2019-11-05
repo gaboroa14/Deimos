@@ -31,6 +31,10 @@ function eliminarEvento() {
     });
 }
 
+function registrarEvento() {
+    $('#modal-regE').addClass('is-active');
+}
+
 function modificarEvento() {
     $('#modal-modE').addClass('is-active');
 }
@@ -77,6 +81,69 @@ function aceptarModE() {
         if (result.value) {
             $('#modal-modE').removeClass('is-active');
             swalExito();
+        }
+    });  
+}
+
+function aceptarRegE() {
+    if ($('#nombRE').val() == ''){
+        Swal.fire('Error','Introduzca el nombre del evento', 'error');
+        return;
+    } else if ($('#fechRE').val() == ''){
+        Swal.fire('Error','Introduzca la fecha del evento', 'error');
+        return;
+    } else if ($('#horRE').val() == ''){
+        Swal.fire('Error','Introduzca la hora del evento', 'error');
+        return;
+    } else if ($('#lugRE').val() == ''){
+        Swal.fire('Error','Introduzca el lugar del evento', 'error');
+        return;
+    } else if ($('#precRE').val() == ''){
+        Swal.fire('Error','Introduzca el precio del evento', 'error');
+        return;
+    } else if ($('#afRE').val() == ''){
+        Swal.fire('Error','Introduzca el aforo máximo del evento', 'error');
+        return;
+    } else if ($('#descRE').val() == ''){
+        Swal.fire('Error','Introduzca la descripción del evento', 'error');
+        return;
+    } 
+    Swal.fire({
+        title: "Registrar Evento",
+        text: "¿Seguro de relizar este registro?",
+        type: "question",
+        showConfirmButton: true,
+        showCancelButton: true,
+        confirmButtonColor: '#a0db81',
+        cancelButtonColor: '#f03a47',
+        confirmButtonText: 'Aceptar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.value) {
+            $('#modal-regE').removeClass('is-active');
+            var token = $('input[name="csrfmiddlewaretoken"]').val();
+            $.ajax({
+                url: '/ajax/crearevento/',
+                type: 'POST',
+                data: {
+                    'csrfmiddlewaretoken': token,
+                    'nombre':$('#nombRE').val(),
+                    'fecha':$('#fechRE').val(),
+                    'hora':$('#horRE').val(),
+                    'lugar':$('#lugRE').val(),
+                    'aforo':$('#afRE').val(),
+                    'precio':$('#precRE').val(),
+                    'descripcion':$('#descRE').val(),
+                },
+                dataType: 'json',
+                success: function(data) {
+                    if (data.exito == true) {
+                        swalExito();                        
+                    } else {
+                        swalError();
+                    }
+                }
+            });
         }
     });  
 }
