@@ -16,6 +16,9 @@ class Tipo_Usuario (models.Model):
     nombre = models.CharField(max_length=20)
     estatus = models.CharField(max_length=1, choices=ESTATUS, default='A')
 
+    def __str__(self):
+        return self.nombre
+
 class Usuario (AbstractUser):
     nombre = models.CharField(max_length=25,null=True,blank=True)
     apellido = models.CharField(max_length=25,null=True,blank=True)

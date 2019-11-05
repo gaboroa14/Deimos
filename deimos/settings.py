@@ -133,3 +133,5 @@ EMAIL_HOST_USER = 'deimoseventos@gmail.com'
 EMAIL_HOST_PASSWORD = 'deimos_eventos16'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 DEFAULT_FROM_EMAIL = 'Artemis <credenciales@artemis.com>'
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+LOGOUT_REDIRECT_URL = 'home'

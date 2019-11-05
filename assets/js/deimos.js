@@ -39,6 +39,11 @@ function modificarEvento() {
     $('#modal-modE').addClass('is-active');
 }
 
+function mostrarLogin(){
+    $('#poplogin').css('visibility','visible');
+    $('#poplogin').css('opacity','1');
+}
+
 function swalAjaxInput(titulo, texto, tipo, input, placeholder, ajax){
     Swal.fire({
         title: titulo,
@@ -83,6 +88,32 @@ function aceptarModE() {
             swalExito();
         }
     });  
+}
+
+function login(){
+    var username = $("#username").val()
+    var password = $("#password").val()
+    var token = $('input[name="csrfmiddlewaretoken"]').val();
+    $.ajax({
+        url: '/ajax/login/',
+        type: 'POST',
+        data: {
+            'csrfmiddlewaretoken': token,
+            'username': username,
+            'password': password,
+        },
+        dataType: 'json',
+        success: function(data) {
+            if (data.exito){
+                Swal.fire("Bienvenido","Login exitoso. Bienvenido.","success",timer=1000);
+                setTimeout(function(){
+                    location.reload()
+                }, 1000);
+            } else {
+                Swal.fire("Error", "Hubo un error con tus credenciales. Verifica e intenta de nuevo", "warning");
+            }
+        }
+    });
 }
 
 function aceptarRegE() {
