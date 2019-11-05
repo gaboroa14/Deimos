@@ -3024,7 +3024,7 @@ a.tag:hover {
 
 .select {
   display: inline-block;
-  max-width: 100%;
+  width: 100%;
   position: relative;
   vertical-align: top; }
   .select:not(.is-multiple) {
@@ -3040,7 +3040,7 @@ a.tag:hover {
     cursor: pointer;
     display: block;
     font-size: 1em;
-    max-width: 100%;
+    width: 100%;
     outline: none; }
     .select select::-ms-expand {
       display: none; }
@@ -3586,7 +3586,7 @@ a.tag:hover {
     flex-grow: 1;
     flex-shrink: 0;
     margin-right: 1.5rem;
-    text-align: right; }
+    text-align: left; }
     .field-label.is-small {
       font-size: 0.75rem;
       padding-top: 0.375em; }
@@ -3607,7 +3607,8 @@ a.tag:hover {
     display: flex;
     flex-basis: 0;
     flex-grow: 5;
-    flex-shrink: 1; }
+    flex-shrink: 1; 
+    margin-right: 1%; }
     .field-body .field {
       margin-bottom: 0; }
     .field-body > .field {

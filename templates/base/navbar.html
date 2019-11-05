@@ -52,30 +52,29 @@
                 {% else %}
                 <div class="buttons">
                     <div class="popover is-popover-bottom">
-                        <button class="button is-primary popover-trigger">Regístrate</button>
-                        <div class="popover-content">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Fruit</th>
-                                        <th>Color</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Apple</td>
-                                        <td>Red</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Banana</td>
-                                        <td>Yellow</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Cucumber</td>
-                                        <td>Green</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <button class="button is-primary popover-trigger" onclick="javascript:mostrarSignUp()" >Regístrate</button>
+                        <div class="popover-content has-background-light" id="popsignUp">
+                            {% csrf_token %}
+                            <form>
+                                <div class="field">
+                                    <label class="label">Usuario:</label>
+                                    <div class="control">
+                                        <input class="input" id="usernameSU" type="text"
+                                            placeholder="Nombre de Usuario" />
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <label class="label">Correo:</label>
+                                    <div class="control">
+                                        <input class="input" id="emailSU" type="email" placeholder="Correo" />
+                                    </div>
+                                </div>
+                                <div class="has-text-centered">
+                                    <a class="button is-danger" onclick="javascript:redirectSignUp();">
+                                        Registrar
+                                    </a>
+                                </div>
+                            </form>
                         </div>
                     </div>
                     <div class="popover is-popover-bottom" style="margin-right:40px !important;">

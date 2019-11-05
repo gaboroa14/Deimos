@@ -10,7 +10,9 @@ urlpatterns = [
     path('entradas/', TemplateView.as_view(template_name='entradas.html'),name="ticket"),
     path('procesar/', TemplateView.as_view(template_name='procesar.html'),name="process"),
     path('eventos/', AdminEventos.as_view(), name="admin"),
+    path('registrar/', CrearUsuario.as_view(), name="signUp"),
     path('ajax/crearevento/', CrearEvento),
     path('ajax/login/', Login),
+    path('ajax/redirectSU/', RedirectSignUp),
     path('logout/', LogoutView.as_view(), name='logout')
 ]

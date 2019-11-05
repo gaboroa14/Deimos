@@ -1,3 +1,6 @@
+var poplogin = false;
+var popsignUp = false;
+
 function comprarEntrada(evento){
     swalAjaxInput(
         "Confirmar compra.",
@@ -40,8 +43,27 @@ function modificarEvento() {
 }
 
 function mostrarLogin(){
-    $('#poplogin').css('visibility','visible');
-    $('#poplogin').css('opacity','1');
+    if (poplogin) {
+        $('#poplogin').css('visibility', 'hidden');
+        $('#poplogin').css('opacity', '0');
+        poplogin = false;
+    } else {
+        $('#poplogin').css('visibility', 'visible');
+        $('#poplogin').css('opacity', '1');
+        poplogin = true;
+    }
+}
+
+function mostrarSignUp() {
+    if (popsignUp) {
+        $('#popsignUp').css('visibility', 'hidden');
+        $('#popsignUp').css('opacity', '0');
+        popsignUp = false;
+    } else {
+        $('#popsignUp').css('visibility', 'visible');
+        $('#popsignUp').css('opacity', '1');
+        popsignUp = true;
+    }
 }
 
 function swalAjaxInput(titulo, texto, tipo, input, placeholder, ajax){
@@ -109,6 +131,29 @@ function login(){
                 setTimeout(function(){
                     location.reload()
                 }, 1000);
+            } else {
+                Swal.fire("Error", "Hubo un error con tus credenciales. Verifica e intenta de nuevo", "warning");
+            }
+        }
+    });
+}
+
+function redirectSignUp() {
+    var username = $("#usernameSU").val()
+    var email = $("#emailSU").val()
+    var token = $('input[name="csrfmiddlewaretoken"]').val();
+    $.ajax({
+        url: '/ajax/redirectSU/',
+        type: 'POST',
+        data: {
+            'csrfmiddlewaretoken': token,
+            'username': username,
+            'email': email,
+        },
+        dataType: 'json',
+        success: function (data) {
+            if (data.exito) {
+                window.location.href = "/registrar/";
             } else {
                 Swal.fire("Error", "Hubo un error con tus credenciales. Verifica e intenta de nuevo", "warning");
             }

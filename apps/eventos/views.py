@@ -1,11 +1,18 @@
-from django.shortcuts import render
-from .models import Evento
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from .models import Evento, Usuario
 from django.http import JsonResponse
+from django.views.generic import CreateView, TemplateView
 from django.views.generic.list import ListView
 from django.contrib.auth import authenticate, login
+from django.forms import Form
 
 ## VISTAS GENÉRICAS DE DJANGO
 
+
+class CrearUsuario(TemplateView):
+    template_name = "registrar.html"
+    
 class ListaEventos(ListView):
     model = Evento
     template_name = "inicio.html"
@@ -53,3 +60,15 @@ def Login(request):
             return JsonResponse({'exito':False})
     except:
         return JsonResponse({'exito':False})
+
+
+def RedirectSignUp(request):
+    try:
+        response = JsonResponse({'exito': True})
+        username = request.POST.get('username', None)
+        email = request.POST.get('email', None)
+        response.set_cookie('signUp-user', username)
+        response.set_cookie('signUp-email', email)
+        return response
+    except:
+        return JsonResponse({'exito': False})

@@ -1,0 +1,156 @@
+{% extends "base/base.html" %}
+
+{% block contenido %}
+<section class="hero is-primary is-bold">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title is-family-primary">
+                Completar Registro
+            </h1>
+            <h2 class="subtitle is-family-secondary has-text-justified">
+                A continuación podrás completar los datos para registrar.
+            </h2>
+        </div>
+    </div>
+</section>
+<section class="section">
+    <div class="container">
+        <div class="box">
+            <article class="tile is-child has-text-justified" style="height: 85%;">
+                {% csrf_token %}
+                <form id="signUp">
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label">Nombre: </label>
+                        </div>
+                        <div class="field-body">
+                            <div class="field">
+                                <p class="control">
+                                    <input class="input" type="text" />
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="field-label is-normal">
+                            <label class="label">Apellido: </label>
+                        </div>
+                        <div class="field-body">
+                            <div class="field">
+                                <p class="control">
+                                    <input class="input" type="text" />
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="field-label is-normal">
+                            <label class="label">Correo: </label>
+                        </div>
+                        <div class="field-body">
+                            <div class="field">
+                                <p class="control">
+                                    <input class="input" type="email" />
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label">Sexo: </label>
+                        </div>
+                        <div class="field-body">
+                            <div class="field">
+                                <p class="control">
+                                    <div class="select">
+                                        <select>
+                                            <option selected>Masculino</option>
+                                            <option>Femenino</option>
+                                            <option>Otro</option>
+                                        </select>
+                                    </div>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="field-label is-small">
+                            <label class="label">Fecha de Nacimiento: </label>
+                        </div>
+                        <div class="field-body">
+                            <div class="field">
+                                <p class="control">
+                                    <input class="input" type="date" />
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="field-label is-small">
+                            <label class="label">Organización donde trabaja: </label>
+                        </div>
+                        <div class="field-body">
+                            <div class="field">
+                                <p class="control">
+                                    <div class="select">
+                                        <select>
+                                            <option selected>Masculino</option>
+                                            <option>Femenino</option>
+                                            <option>Otro</option>
+                                        </select>
+                                    </div>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label">Puesto: </label>
+                        </div>
+                        <div class="field-body">
+                            <div class="field">
+                                <p class="control">
+                                    <div class="select">
+                                        <select>
+                                            <option selected>Masculino</option>
+                                            <option>Femenino</option>
+                                            <option>Otro</option>
+                                        </select>
+                                    </div>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="field-label is-normal">
+                            <label class="label">Contraseña: </label>
+                        </div>
+                        <div class="field-body">
+                            <div class="field">
+                                <p class="control">
+                                    <input class="input" type="password" />
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="field-label is-small">
+                            <label class="label">Confirmar Contraseña: </label>
+                        </div>
+                        <div class="field-body">
+                            <div class="field">
+                                <p class="control">
+                                    <input class="input" type="password" />
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </article>
+
+            <div class="has-text-centered" style="height: 15%;">
+                <br />
+                <a class="button is-info" onclick="javascript:modificarEvento();">Modificar</a>
+                <a class="button is-primary" onclick="javascript:eliminarEvento();">Eliminar</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
