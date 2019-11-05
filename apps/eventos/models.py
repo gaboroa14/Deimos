@@ -65,6 +65,15 @@ class Evento(models.Model):
     )
     estatus = models.CharField(max_length=1,choices=ESTATUS_EVENTO, default='V')
 
+    def EntradasVendidas(self):
+        return Entrada.objects.filter(evento=self).count()
+
+    def EntradasDisponibles(self):
+        return self.aforo-self.EntradasVendidas()
+
+    def MontoRecaudado(self):
+        return self.EntradasVendidas()*self.precio
+
 class Pago(models.Model):
     medio_pago = models.ForeignKey(Medio_Pago,models.CASCADE)
     referencia = models.CharField(max_length=25)
