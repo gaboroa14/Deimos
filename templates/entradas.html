@@ -8,7 +8,7 @@
                 Mis entradas.
             </h1>
             <h2 class="subtitle is-family-secondary has-text-justified">
-                En esta sección encontrarás un listado con las entradas que has adquirido.
+                Revisa, confirma y consulta las entradas que has comprado hasta ahora.
             </h2>
         </div>
     </div>
@@ -16,23 +16,32 @@
 
 <section class="section">
     <div class="container">
+        {% if object_list %}
         <table class="table is-striped is-hoverable is-fullwidth">
             <thead class="has-background-dark">
-                <th class="has-background-dark has-text-white has-text-centered">Nombre de usuario</th>
-                <th class="has-background-dark has-text-white has-text-centered">Nombre</th>
-                <th class="has-background-dark has-text-white has-text-centered">Apellido</th>
+                <th class="has-background-dark has-text-white has-text-centered">Evento</th>
+                <th class="has-background-dark has-text-white has-text-centered">Fecha de Compra</th>
+                <th class="has-background-dark has-text-white has-text-centered">Cantidad</th>
+                <th class="has-background-dark has-text-white has-text-centered">Precio</th>
                 <th class="has-background-dark has-text-white has-text-centered">Opciones</th>
             </thead>
             <tbody>
+                {% for entrada in object_list %}
                 <tr>
-                    <td class="has-text-centered">azrael42</td>
-                    <td class="has-text-centered">Lucifer</td>
-                    <td class="has-text-centered">Morningstar</td>
+                    <td class="has-text-centered">{{entrada.evento.nombre}}</td>
+                    <td class="has-text-centered">{{entrada.fecha}}</td>
+                    <td class="has-text-centered">{{entrada.cantidad}}</td>
+                    <td class="has-text-centered">Bs. {{entrada.costo}}</td>
                     <td class="has-text-centered">
-                        <a class="button is-primary">Ver</a>
+                        <a class="button is-primary" href="{% url 'consultar_entrada' entrada.id %}">Ver</a>
                     </td>
                 </tr>
+                {% endfor %}
             </tbody>
+            {% else %}
+            <h1 class="title is-family-primary is-4">Aún no compras entradas. <a href="{% url 'home' %}">¿Deseas comprar
+                    alguna?</a></h1>
+            {% endif %}
         </table>
     </div>
 </section>

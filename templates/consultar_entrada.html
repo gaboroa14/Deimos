@@ -1,0 +1,78 @@
+{% extends "base/base.html" %}
+{% block contenido %}
+<section class="hero is-primary is-bold">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title is-family-primary">
+                Consultar tu entrada.
+            </h1>
+            <h2 class="subtitle is-family-secondary has-text-justified">
+                Esta interfaz te permite consultar la entrada de tu elección.
+            </h2>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="columns is-centered">
+        <div class="column is-four-fifths">
+            <div class="content">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="content">
+                            <div class="title is-family-primary has-text-justified">
+                                Tu entrada para: "{{entrada.evento.nombre}}"
+                            </div>
+                            <div class="subtitle is-family-secondary has-text-justified">
+                                "{{entrada.evento.descripcion}}"
+                            </div>
+                        </div>
+                        <div class="columns is-centered has-text-centered">
+                            <div class="column has-background-light">
+                                <div class="subtitle is-family-primary is-5"><strong>Datos de
+                                        la Entrada:</strong></div>
+                                <p><strong>Fecha de compra: </strong>{{entrada.fecha}}</p>
+                                <p><strong>Cantidad comprada: </strong>{{entrada.cantidad}}
+                                </p>
+                                <p><strong>Precio Unitario: </strong>{{entrada.costo}}</p>
+                                <p><strong>Total Pagado: </strong>{{entrada.MontoTotal}}</p>
+                                <p><strong>Estatus de la Entrada:
+                                    </strong>{{entrada.get_estatus_display}}</p>
+                            </div>
+                            <div class="column">
+                                <div class="subtitle is-family-primary is-5"><strong>Datos de
+                                        Pago:</strong></div>
+                                <p><strong>ID del pago: </strong>{{entrada.forma_pago.id}}</p>
+                                <p><strong>Referencia: </strong>{{entrada.forma_pago.referencia}}
+                                </p>
+                                <p><strong>Medio de Pago: </strong>{{entrada.forma_pago.medio_pago.nombre}}</p>
+                                <p><strong>Comprobante: </strong><a href="{{entrada.forma_pago.comprobante.url}}"
+                                        class="button is-primary is-small">Ver</a></p>
+                                <p><strong>Estatus del Pago:
+                                    </strong>{{entrada.forma_pago.get_estatus_display}}</p>
+                            </div>
+                            <div class="column has-background-light">
+                                <div class="subtitle is-family-primary is-5"><strong>Datos del Evento:</strong></div>
+                                <p><strong>Lugar: </strong>{{entrada.evento.lugar}}</p>
+                                <p><strong>Fecha: </strong>{{entrada.evento.fecha}}</p>
+                                <p><strong>Hora: </strong>{{entrada.evento.hora|time:'h:i a'}}</p>
+                                <p><strong>Estado del Evento: </strong>{{entrada.evento.get_estatus_display}}</p>
+                            </div>
+                        </div>
+                        <div class="has-text-centered">
+                            <div class="subtitle is-family-primary is-4"><strong>Código QR
+                                    de tu entrada:</strong></div>
+                            <img src="{{entrada.qr.url}}" style="margin-top:-20px;"></img>
+                        </div>
+                    </div>
+                    <div class="has-text-centered">
+                        <a class="button is-danger" href="{% url 'ticket' %}">Volver al listado</a>
+                    </div>
+                    <br/>
+                    <br/>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock contenido %}

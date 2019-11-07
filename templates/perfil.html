@@ -1,0 +1,56 @@
+{% extends "base/base.html" %}
+{% block contenido %}
+<section class="hero is-warning is-bold">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title is-family-primary">
+                Mi perfil.
+            </h1>
+            <h2 class="subtitle is-family-secondary has-text-justified">
+                Consulta tus datos personales a continuación.
+            </h2>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="columns is-centered">
+        <div class="column is-four-fifths">
+            <div class="content">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="content">
+                            <div class="columns is-centered">
+                                <div class="column has-text-centered">
+                                    <div class="subtitle is-family-primary is-5"><strong>Datos Personales:</strong>
+                                    </div>
+                                    <p><strong>Nombre de Usuario: </strong>{{user.username}}</p>
+                                    <p><strong>Nombre: </strong>{{user.nombre}}</p>
+                                    {% if user.apellido != "" and user.apellido != None %}
+                                    <p><strong>Apellido: </strong>{{user.apellido}}</p>
+                                    {% endif %}
+                                    <p><strong>Sexo: </strong>{{user.get_sexo_display}}</p>
+                                    <p><strong>Fecha de Nacimiento: </strong>{{user.fecha_nacimiento}}</p>
+                                    <p><strong>Correo Electrónico: </strong>{{user.correo}}</p>
+                                    <p><strong>Fecha de Registro: </strong>{{user.date_joined}}</p>
+                                </div>
+                                <div class="column has-text-centered">
+                                    <div class="subtitle is-family-primary is-5"><strong>Datos de mi Organización:</strong>
+                                    </div>
+                                    <p><strong>Nombre: </strong>{{organizacion.nombre}}</p>
+                                    <p><strong>Correo Electrónico: </strong>{{organizacion.correo}}</p>
+                                    <p><strong>Ubicación: </strong>{{organizacion.ubicacion}}</p>
+                                    <p><strong>Puesto: </strong>{{puesto}}</p>
+                                </div>
+                            </div>
+                            <div class="has-text-centered">
+                                <a href="{% url 'home' %}" class="button is-primary">Volver al Inicio</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock contenido %}

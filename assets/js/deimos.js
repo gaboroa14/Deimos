@@ -142,23 +142,27 @@ function redirectSignUp() {
     var username = $("#usernameSU").val()
     var email = $("#emailSU").val()
     var token = $('input[name="csrfmiddlewaretoken"]').val();
-    $.ajax({
-        url: '/ajax/redirectSU/',
-        type: 'POST',
-        data: {
-            'csrfmiddlewaretoken': token,
-            'username': username,
-            'email': email,
-        },
-        dataType: 'json',
-        success: function (data) {
-            if (data.exito) {
-                window.location.href = "/registrar/";
-            } else {
-                Swal.fire("Error", "Hubo un error con tus credenciales. Verifica e intenta de nuevo", "warning");
+    if (email!='' && username!=''){
+        $.ajax({
+            url: '/ajax/redirectSU/',
+            type: 'POST',
+            data: {
+                'csrfmiddlewaretoken': token,
+                'username': username,
+                'email': email,
+            },
+            dataType: 'json',
+            success: function (data) {
+                if (data.exito) {
+                    window.location.href = "/registrar/?email=" + email + "&username=" + username;
+                } else {
+                    Swal.fire("Error", data.mensaje, "warning");
+                }
             }
-        }
-    });
+        });
+    } else {
+        Swal.fire("Error","Debe llenar todos los datos","warning");
+    }
 }
 
 function aceptarRegE() {

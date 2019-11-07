@@ -17,27 +17,34 @@
     <div class="container">
         <div class="box">
             <article class="tile is-child has-text-justified" style="height: 85%;">
+                <form id="signUp" method="POST">
                 {% csrf_token %}
-                <form id="signUp">
+                {% if form.errors %}
+                {% for error in form.errors %}
+                {{error.message}}
+                {% endfor %}
+                {% else %}
+                {% endif %}
                     <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label">Usuario: </label>
+                        </div>
+                        <div class="field-body">
+                            <div class="field">
+                                <p class="control">
+                                    <input class="input" type="text" value="{{username}}" name="username"
+                                        id="id_username" />
+                                </p>
+                            </div>
+                        </div>
+
                         <div class="field-label is-normal">
                             <label class="label">Nombre: </label>
                         </div>
                         <div class="field-body">
                             <div class="field">
                                 <p class="control">
-                                    <input class="input" type="text" />
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="field-label is-normal">
-                            <label class="label">Apellido: </label>
-                        </div>
-                        <div class="field-body">
-                            <div class="field">
-                                <p class="control">
-                                    <input class="input" type="text" />
+                                    <input class="input" type="text" name="nombre" id="id_nombre" />
                                 </p>
                             </div>
                         </div>
@@ -48,7 +55,7 @@
                         <div class="field-body">
                             <div class="field">
                                 <p class="control">
-                                    <input class="input" type="email" />
+                                    <input class="input" type="email" value="{{email}}" name="correo" id="id_correo" />
                                 </p>
                             </div>
                         </div>
@@ -62,10 +69,10 @@
                             <div class="field">
                                 <p class="control">
                                     <div class="select">
-                                        <select>
-                                            <option selected>Masculino</option>
-                                            <option>Femenino</option>
-                                            <option>Otro</option>
+                                        <select name="sexo" id="id_sexo">
+                                            <option value="M" selected>Masculino</option>
+                                            <option value="F">Femenino</option>
+                                            <option value="O">Otro</option>
                                         </select>
                                     </div>
                                 </p>
@@ -78,7 +85,7 @@
                         <div class="field-body">
                             <div class="field">
                                 <p class="control">
-                                    <input class="input" type="date" />
+                                    <input class="input" type="date" name="fecha_nacimiento" id="id_fecha_nacimiento" />
                                 </p>
                             </div>
                         </div>
@@ -90,10 +97,10 @@
                             <div class="field">
                                 <p class="control">
                                     <div class="select">
-                                        <select>
-                                            <option selected>Masculino</option>
-                                            <option>Femenino</option>
-                                            <option>Otro</option>
+                                        <select name="organizacion" id="id_organizacion">
+                                            {% for organizacion in organizaciones %}
+                                            <option value="{{organizacion.id}}">{{organizacion.nombre}}</option>
+                                            {% endfor %}
                                         </select>
                                     </div>
                                 </p>
@@ -108,13 +115,7 @@
                         <div class="field-body">
                             <div class="field">
                                 <p class="control">
-                                    <div class="select">
-                                        <select>
-                                            <option selected>Masculino</option>
-                                            <option>Femenino</option>
-                                            <option>Otro</option>
-                                        </select>
-                                    </div>
+                                    <input class="input" type="text" name="puesto" id="id_puesto" />
                                 </p>
                             </div>
                         </div>
@@ -125,7 +126,7 @@
                         <div class="field-body">
                             <div class="field">
                                 <p class="control">
-                                    <input class="input" type="password" />
+                                    <input class="input" type="password" name="password1" id="id_password1" />
                                 </p>
                             </div>
                         </div>
@@ -136,20 +137,17 @@
                         <div class="field-body">
                             <div class="field">
                                 <p class="control">
-                                    <input class="input" type="password" />
+                                    <input class="input" type="password" name="password2" id="id_password2" />
                                 </p>
                             </div>
                         </div>
                     </div>
-
+                    <div class="has-text-centered" style="height: 15%;">
+                        <br />
+                        <input type="submit" class="button is-info" value="Registrar" />
+                    </div>
                 </form>
             </article>
-
-            <div class="has-text-centered" style="height: 15%;">
-                <br />
-                <a class="button is-info" onclick="javascript:modificarEvento();">Modificar</a>
-                <a class="button is-primary" onclick="javascript:eliminarEvento();">Eliminar</a>
-            </div>
         </div>
     </div>
 </section>

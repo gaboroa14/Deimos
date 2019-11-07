@@ -22,10 +22,11 @@ class Tipo_Usuario (models.Model):
 class Usuario (AbstractUser):
     nombre = models.CharField(max_length=25,null=True,blank=True)
     apellido = models.CharField(max_length=25,null=True,blank=True)
-    tipo_user = models.ForeignKey(Tipo_Usuario,on_delete=models.CASCADE,null=True,blank=True)
+    tipo_user = models.ForeignKey(Tipo_Usuario,on_delete=models.CASCADE,null=True,blank=True,default=3)
     SEXO = (
         ('M','Masculino'),
-        ('F','Femenino')
+        ('F','Femenino'),
+        ('O','Otro'),
     )
     sexo = models.CharField(max_length=1,choices=SEXO,null=True,blank=True)
     fecha_nacimiento = models.DateField(null=True,blank=True)
@@ -103,17 +104,11 @@ class Entrada(models.Model):
     )
     estatus = models.CharField(max_length=1,choices=ESTATUS_ENTRADA,default='A')
 
+    def MontoTotal(self):
+        return self.costo * self.cantidad
+
 class Registro_Participacion(models.Model):
     entrada = models.ForeignKey(Entrada,models.CASCADE)
     encargado = models.ForeignKey(Usuario,models.CASCADE)
     fecha = models.DateField(auto_now=True)
     estatus = models.CharField(max_length=1,choices=ESTATUS)
-
-@receiver(post_save,sender=Entrada)
-def ImagenQR(sender, instance, **kwargs):
-    if instance.qr == None:
-        img = qrcode.make(instance.id)
-        with open('/home/gabriel/Deimos/media/qr/' + instance.id + '.png', 'wb') as f:
-            img.save(f)
-        instance.qr = 'qr/' + instance.id + '.png'
-        instance.save()

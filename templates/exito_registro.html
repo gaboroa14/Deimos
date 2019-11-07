@@ -1,0 +1,22 @@
+{% extends "base/base.html" %}
+{% block contenido %}
+<div class="content">
+    <div class="card has-background-success">
+        <div class="card-content">
+            <p class="title">
+                Registro exitoso
+            </p>
+            <p class="subtitle">
+                Ahora puedes iniciar sesión con tus credenciales.
+            </p>
+        </div>
+        <footer class="card-footer">
+            <p class="card-footer-item">
+                <span>
+                    <a href="{% url 'home' %}" class="button is-danger">Iniciar sesión</a>
+                </span>
+            </p>
+        </footer>
+    </div>
+</div>
+{% endblock contenido %}
