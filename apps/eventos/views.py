@@ -6,9 +6,12 @@ from django.http import JsonResponse
 from django.views.generic import CreateView, TemplateView, DetailView
 from django.views.generic.list import ListView
 from django.contrib.auth import authenticate, login
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from .forms import *
 import random
+from pyzbar.pyzbar import decode
+from PIL import Image
+from django.forms.forms import NON_FIELD_ERRORS
 
 # CHECKER PARA REDIRIGIR AL INICIO ADECUADO
 
@@ -123,11 +126,36 @@ class ProcesarEntrada(CreateView):
     template_name = "procesar.html"
     form_class = ProcesarEntrada
     success_url = reverse_lazy('entrada_procesada')
+    codigo = None
 
     def form_valid(self, form):
         imagen = form.cleaned_data['qr']
-        print(imagen)
+        data = decode(Image.open(imagen))
+        if len(data) != 0:
+            self.codigo = str(data[0].data)[2:-1]
+            entrada = Entrada.objects.get(id=self.codigo)
+            if entrada:
+                if entrada.estatus == 'A':
+                    reg = form.save(commit=False)
+                    reg.encargado = self.request.user
+                    reg.entrada = entrada
+                    reg.save()
+                    entrada.estatus = 'F'
+                    entrada.save()
+                    return super().form_valid(form)
+                else:
+                    form._errors[NON_FIELD_ERRORS] = form.error_class(['La entrada ya fue utilizada previamente.'])
+                    return super().form_invalid(form)
+            else:
+                form._errors[NON_FIELD_ERRORS] = form.error_class(['La imagen no contiene un código QR válido.'])
+                return super().form_invalid(form)
+        else:
+            form._errors[NON_FIELD_ERRORS] = form.error_class(['La imagen no contiene un código QR válido.'])
+            return super().form_invalid(form)
         return super().form_valid(form)    
+
+    def get_success_url(self):
+        return reverse_lazy('entrada_procesada', kwargs={'pk': self.codigo})
 
 class EntradaProcesada(DetailView):
     model = Entrada
