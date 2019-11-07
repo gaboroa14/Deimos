@@ -172,7 +172,7 @@ function redirectSignUp() {
             dataType: 'json',
             success: function (data) {
                 if (data.exito) {
-                    window.location.href = "/registrar/?email=" + email + "&username=" + username;
+                    window.location.href = "/registrar/";
                 } else {
                     Swal.fire("Error", data.mensaje, "warning");
                 }
