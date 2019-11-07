@@ -18,19 +18,20 @@
     <div class="container">
         <div class="columns is-6 is-centered">
             <div class="box has-text-centered">
-                <div class="title is-5 is-family-secondary">
-                    Sube un código QR a continuación.
-                </div>
-                <div class="input">
-                    <input type="file">
-                    </input>
-                </div>
-                <div class="has-text-centered">
-                <br/>
-                    <a class="button is-primary is-rounded">
-                        Verificar
-                    </a>
-                </div>
+                <form id="procesar" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="title is-5 is-family-secondary">
+                        Sube un código QR a continuación.
+                    </div>
+                    <div class="input">
+                        <input type="file" accept="image/*;capture=camera" name="qr" id="id_qr">
+                        </input>
+                    </div>
+                    <div class="has-text-centered">
+                        <br />
+                        <input type="submit" class="button is-primary is-rounded" value="Verificar"/>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

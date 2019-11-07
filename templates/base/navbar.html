@@ -2,7 +2,7 @@
 
 <nav class="navbar is-fixed-top is-black" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-        <a class="navbar-item" href="{% url 'home' %}">
+        <a class="navbar-item" href="{% if user.tipo_user.id == 1 %}{% url 'entradas_vendidas' %}{% elif user.tipo_user.id == 2 %}{% url 'process' %}{% else %}{% url 'home' %}{% endif %}">
             <img src="{% static '/img/logo.png' %}" width="112" height="28">
         </a>
 
@@ -17,6 +17,9 @@
     <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-start">
             {% if user.tipo_user.nombre == "Administrador" %}
+            <a class="navbar-item" href="{% url 'entradas_vendidas' %}">
+                Entradas Vendidas
+            </a>
             <a class="navbar-item" href="{% url 'admin' %}">
                 Eventos
             </a>

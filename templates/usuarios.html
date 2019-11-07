@@ -20,18 +20,22 @@
             <thead class="has-background-dark">
                 <th class="has-background-dark has-text-white has-text-centered">Nombre de usuario</th>
                 <th class="has-background-dark has-text-white has-text-centered">Nombre</th>
-                <th class="has-background-dark has-text-white has-text-centered">Apellido</th>
+                <th class="has-background-dark has-text-white has-text-centered">Tipo de Usuario</th>
+                <th class="has-background-dark has-text-white has-text-centered">Última Conexión</th>
                 <th class="has-background-dark has-text-white has-text-centered">Opciones</th>
             </thead>
             <tbody>
+                {% for usuario in object_list %}
                 <tr>
-                    <td class="has-text-centered">azrael42</td>
-                    <td class="has-text-centered">Lucifer</td>
-                    <td class="has-text-centered">Morningstar</td>
+                    <td class="has-text-centered">{{usuario.username}}</td>
+                    <td class="has-text-centered">{{usuario.nombre}} {{usuario.apellido}}</td>
+                    <td class="has-text-centered">{{usuario.tipo_user.nombre}}</td>
+                    <td class="has-text-centered">{{usuario.last_login}}</td>
                     <td class="has-text-centered">
                         <a class="button is-primary">Ver</a>
                     </td>
                 </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>

@@ -34,8 +34,8 @@
                                 <p><strong>Fecha de compra: </strong>{{entrada.fecha}}</p>
                                 <p><strong>Cantidad comprada: </strong>{{entrada.cantidad}}
                                 </p>
-                                <p><strong>Precio Unitario: </strong>{{entrada.costo}}</p>
-                                <p><strong>Total Pagado: </strong>{{entrada.MontoTotal}}</p>
+                                <p><strong>Precio Unitario: </strong>Bs. {{entrada.costo}}</p>
+                                <p><strong>Total Pagado: </strong>Bs. {{entrada.MontoTotal}}</p>
                                 <p><strong>Estatus de la Entrada:
                                     </strong>{{entrada.get_estatus_display}}</p>
                             </div>
@@ -59,17 +59,21 @@
                                 <p><strong>Estado del Evento: </strong>{{entrada.evento.get_estatus_display}}</p>
                             </div>
                         </div>
-                        <div class="has-text-centered">
+                        <div class="has-text-centered has-background-light">
                             <div class="subtitle is-family-primary is-4"><strong>Código QR
                                     de tu entrada:</strong></div>
                             <img src="{{entrada.qr.url}}" style="margin-top:-20px;"></img>
+                            <div clas="is-primary is-7">El día del evento, muestra este código al recepcionista que
+                                estará en la puerta.</div>
                         </div>
                     </div>
                     <div class="has-text-centered">
-                        <a class="button is-danger" href="{% url 'ticket' %}">Volver al listado</a>
+                        <a class="button is-danger"
+                            href="{% if user.tipo_user.id == 1 %}{% url 'entradas_vendidas' %}{% else %}{% url 'ticket' %}{% endif %}">Volver
+                            al listado</a>
                     </div>
-                    <br/>
-                    <br/>
+                    <br />
+                    <br />
                 </div>
             </div>
         </div>

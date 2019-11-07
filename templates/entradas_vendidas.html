@@ -1,0 +1,45 @@
+{% extends "base/base.html" %}
+
+{% block contenido %}
+<section class="hero is-danger is-bold">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title is-family-primary">
+                ¡Bienvenido, administrador!
+            </h1>
+            <h2 class="subtitle is-family-secondary has-text-justified">
+                A continuación, te presentamos un listado con las entradas que han sido vendidas por el sistema.
+            </h2>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <table class="table is-striped is-hoverable is-fullwidth">
+            <thead class="has-background-dark">
+                <th class="has-background-dark has-text-white has-text-centered">ID</th>
+                <th class="has-background-dark has-text-white has-text-centered">Usuario</th>
+                <th class="has-background-dark has-text-white has-text-centered">Fecha</th>
+                <th class="has-background-dark has-text-white has-text-centered">Evento</th>
+                <th class="has-background-dark has-text-white has-text-centered">Forma de Pago</th>
+                <th class="has-background-dark has-text-white has-text-centered">Opciones</th>
+            </thead>
+            <tbody>
+                {% for entrada in object_list %}
+                <tr>
+                    <td class="has-text-centered">{{entrada.id|truncatechars:12}}</td>
+                    <td class="has-text-centered">{{entrada.usuario.username}}</td>
+                    <td class="has-text-centered">{{entrada.fecha}}</td>
+                    <td class="has-text-centered">{{entrada.evento.nombre}}</td>
+                    <td class="has-text-centered">{{entrada.forma_pago.medio_pago.nombre}}</td>
+                    <td class="has-text-centered">
+                        <a class="button is-primary is-small" href="{% url 'consultar_entrada' entrada.id %}">Ver</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock contenido %}

@@ -22,7 +22,8 @@
                 <th class="has-background-dark has-text-white has-text-centered">Evento</th>
                 <th class="has-background-dark has-text-white has-text-centered">Fecha de Compra</th>
                 <th class="has-background-dark has-text-white has-text-centered">Cantidad</th>
-                <th class="has-background-dark has-text-white has-text-centered">Precio</th>
+                <th class="has-background-dark has-text-white has-text-centered">Precio Unitario</th>
+                <th class="has-background-dark has-text-white has-text-centered">Total Pagado</th>
                 <th class="has-background-dark has-text-white has-text-centered">Opciones</th>
             </thead>
             <tbody>
@@ -32,6 +33,7 @@
                     <td class="has-text-centered">{{entrada.fecha}}</td>
                     <td class="has-text-centered">{{entrada.cantidad}}</td>
                     <td class="has-text-centered">Bs. {{entrada.costo}}</td>
+                    <td class="has-text-centered">Bs. {{entrada.MontoTotal}}</td>
                     <td class="has-text-centered">
                         <a class="button is-primary" href="{% url 'consultar_entrada' entrada.id %}">Ver</a>
                     </td>

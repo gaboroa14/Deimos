@@ -18,6 +18,7 @@
 <section class="section">
   <div class="container">
     {% if object_list %}
+    {% csrf_token %}
     <h1 class="title is-family-primary">Eventos actuales</h1>
 
     <div class="tile is-ancestor" style="flex-wrap: wrap;">
@@ -32,6 +33,7 @@
             <p><strong>Fecha: </strong>{{evento.fecha}}</p>
             <p><strong>Hora: </strong>{{evento.hora|time:'h:i a'}}</p>
             <p><strong>Precio: </strong>Bs. {{evento.precio}}</p>
+            <p><strong>Disponibles: </strong>{{evento.EntradasDisponibles}} entrada(s).</p>
           </article>
 
           <div class="has-text-centered" style="height: 22%;">

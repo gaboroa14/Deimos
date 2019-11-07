@@ -2,6 +2,7 @@ var poplogin = false;
 var popsignUp = false;
 
 function comprarEntrada(evento){
+    var token = $('input[name="csrfmiddlewaretoken"]').val();
     swalAjaxInput(
         "Confirmar compra.",
         "Introduzca la cantidad de entradas a comprar.",
@@ -9,9 +10,26 @@ function comprarEntrada(evento){
         "number",
         "Cantidad",
         function(){
-            console.log(evento);
-            console.log($('input[placeholder="Cantidad"]').val()),
-            swalExito();
+            $.ajax({
+                url: '/ajax/comprar_entrada/',
+                type: 'POST',
+                data: {
+                    'csrfmiddlewaretoken': token,
+                    'evento': evento,
+                    'cantidad': $('input[placeholder="Cantidad"]').val(),
+                },
+                dataType: 'json',
+                success: function(data) {
+                    if (data.exito){
+                        Swal.fire("Éxito","Entrada comprada exitosamente.","success",timer=1000);
+                        setTimeout(function(){
+                            window.location.replace("/entradas/" + data.id + "/");
+                        }, 1000);
+                    } else {
+                        Swal.fire("Error", data.mensaje, "warning");
+                    }
+                }
+            });
         }
     )
 }
@@ -129,7 +147,7 @@ function login(){
             if (data.exito){
                 Swal.fire("Bienvenido","Login exitoso. Bienvenido.","success",timer=1000);
                 setTimeout(function(){
-                    location.reload()
+                    window.location.replace("/check/");
                 }, 1000);
             } else {
                 Swal.fire("Error", "Hubo un error con tus credenciales. Verifica e intenta de nuevo", "warning");

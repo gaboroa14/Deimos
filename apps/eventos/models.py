@@ -81,7 +81,7 @@ class Evento(models.Model):
 class Pago(models.Model):
     medio_pago = models.ForeignKey(Medio_Pago,models.CASCADE)
     referencia = models.CharField(max_length=25)
-    comprobante = models.ImageField(upload_to='comprobantes/')
+    comprobante = models.ImageField(upload_to='comprobantes/', default='comprobantes/default.png')
     ESTATUS_PAGO = (
         ('P','Pendiente de aprobación'),
         ('A','Aprobado')
@@ -108,7 +108,19 @@ class Entrada(models.Model):
         return self.costo * self.cantidad
 
 class Registro_Participacion(models.Model):
-    entrada = models.ForeignKey(Entrada,models.CASCADE)
-    encargado = models.ForeignKey(Usuario,models.CASCADE)
+    entrada = models.ForeignKey(Entrada,models.CASCADE,blank=True, null=True)
+    encargado = models.ForeignKey(Usuario,models.CASCADE,blank=True, null=True)
     fecha = models.DateField(auto_now=True)
-    estatus = models.CharField(max_length=1,choices=ESTATUS)
+    qr = models.ImageField(upload_to='registro/', blank=True, null=True)
+    estatus = models.CharField(max_length=1,choices=ESTATUS, default='A')
+
+## SEÑAL PARA EL CÓDIGO QR
+
+@receiver(post_save,sender=Entrada)
+def ImagenQR(sender, instance, **kwargs):
+    if instance.qr == None:
+        img = qrcode.make(instance.id)
+        with open('/home/gabriel/Deimos/media/qr/' + str(instance.id) + '.png', 'wb') as f:
+            img.save(f)
+        instance.qr = 'qr/' + str(instance.id) + '.png'
+        instance.save()
