@@ -125,7 +125,8 @@ class ProcesarEntrada(CreateView):
     success_url = reverse_lazy('entrada_procesada')
 
     def form_valid(self, form):
-        imagen = 
+        imagen = form.cleaned_data['qr']
+        print(imagen)
         return super().form_valid(form)    
 
 class EntradaProcesada(DetailView):
