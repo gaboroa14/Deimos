@@ -37,8 +37,8 @@ class Registro(CreateView):
     def get_context_data(self, **kwargs):
         context = super(Registro, self).get_context_data(**kwargs)
         try:
-            context['email'] = self.request.GET['email']
-            context['username'] = self.request.GET['username']
+            context['email'] = self.request.COOKIES['email']
+            context['username'] = self.request.COOKIES['user']
         except:
             pass
         context['organizaciones'] = Organizacion.objects.filter(estatus='A')
@@ -128,7 +128,10 @@ def RedirectSignUp(request):
         except:
             user_email = None
         if user_username == None and user_email == None:
-            return JsonResponse({'exito': True})
+            response = JsonResponse({'exito': True})
+            response.set_cookie('user', username, max_age=20)
+            response.set_cookie('email', email, max_age=20)
+            return response
         elif user_username != None and user_email == None:
             return JsonResponse({'exito': False,'mensaje':'Ya existe un usuario con ese nombre de usuario.'})
         elif user_username == None and user_email != None:
