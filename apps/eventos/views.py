@@ -67,9 +67,7 @@ class Entradas(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(Entradas, self).get_context_data(**kwargs)
-        print(self.request.user.id)
         context['object_list'] = Entrada.objects.filter(usuario=self.request.user.id)
-        print(context['object_list'])
         return context
 
 class ConsultarEntrada(DetailView):
