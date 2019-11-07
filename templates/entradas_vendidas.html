@@ -16,6 +16,7 @@
 
 <section class="section">
     <div class="container">
+        {% if object_list %}
         <table class="table is-striped is-hoverable is-fullwidth">
             <thead class="has-background-dark">
                 <th class="has-background-dark has-text-white has-text-centered">ID</th>
@@ -40,6 +41,11 @@
                 {% endfor %}
             </tbody>
         </table>
+        {% else %}
+        <div class="title is-font-primary is-4">
+            ¡Oh, no! Aún no has vendido ninguna entrada :'-(
+        </div>
+        {% endif %}
     </div>
 </section>
 {% endblock contenido %}
