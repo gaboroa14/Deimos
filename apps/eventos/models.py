@@ -107,6 +107,11 @@ class Entrada(models.Model):
     def MontoTotal(self):
         return self.costo * self.cantidad
 
+class Asiento(models.Model):
+    entrada = models.ForeignKey(Entrada, models.CASCADE)
+    fila = models.CharField(max_length=1)
+    numero = models.IntegerField()
+
 class Registro_Participacion(models.Model):
     entrada = models.ForeignKey(Entrada,models.CASCADE,blank=True, null=True)
     encargado = models.ForeignKey(Usuario,models.CASCADE,blank=True, null=True)

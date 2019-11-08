@@ -31,6 +31,8 @@
                                 <p><strong>Fecha de compra: </strong>{{entrada.fecha}}</p>
                                 <p><strong>Cantidad comprada: </strong>{{entrada.cantidad}}
                                 </p>
+                                <p><strong>Asientos: </strong>{% for asiento in asientos %}{{asiento.fila}}-{{asiento.numero}} {% endfor %}
+                                </p>
                             </div>
                             <div class="column has-background-light">
                                 <div class="subtitle is-family-primary is-5"><strong>Datos del Evento:</strong></div>

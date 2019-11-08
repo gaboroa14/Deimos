@@ -34,6 +34,8 @@
                                 <p><strong>Fecha de compra: </strong>{{entrada.fecha}}</p>
                                 <p><strong>Cantidad comprada: </strong>{{entrada.cantidad}}
                                 </p>
+                                <p><strong>Asientos: </strong>{% for asiento in asientos %}{{asiento.fila}}-{{asiento.numero}} {% endfor %}
+                                </p>
                                 <p><strong>Precio Unitario: </strong>Bs. {{entrada.costo}}</p>
                                 <p><strong>Total Pagado: </strong>Bs. {{entrada.MontoTotal}}</p>
                                 <p><strong>Estatus de la Entrada:

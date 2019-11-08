@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from .models import Evento, Usuario, Organizacion, Usuario_Organizacion, Entrada, Medio_Pago, Pago, Registro_Participacion
+from .models import Evento, Usuario, Organizacion, Usuario_Organizacion, Entrada, Medio_Pago, Pago, Registro_Participacion, Asiento
 import uuid
 from django.http import JsonResponse
 from django.views.generic import CreateView, TemplateView, DetailView
@@ -12,6 +12,7 @@ import random
 from pyzbar.pyzbar import decode
 from PIL import Image
 from django.forms.forms import NON_FIELD_ERRORS
+import string
 
 # CHECKER PARA REDIRIGIR AL INICIO ADECUADO
 
@@ -99,6 +100,10 @@ class ConsultarEntrada(DetailView):
     model = Entrada
     template_name = "consultar_entrada.html"
 
+    def get_context_data(self, **kwargs):
+        context = super(ConsultarEntrada, self).get_context_data(**kwargs)
+        context['asientos'] = Asiento.objects.filter(entrada=self.kwargs['pk'])
+        return context
 
 class MiPerfil(TemplateView):
     template_name = "perfil.html"
@@ -161,6 +166,11 @@ class EntradaProcesada(DetailView):
     model = Entrada
     template_name = "entrada_procesada.html"
 
+    def get_context_data(self, **kwargs):
+        context = super(EntradaProcesada, self).get_context_data(**kwargs)
+        context['asientos'] = Asiento.objects.filter(entrada=self.kwargs['pk'])
+        return context
+
 # AJAX
 
 def CrearEvento(request):
@@ -221,25 +231,30 @@ def RedirectSignUp(request):
 
 
 def ComprarEntrada(request):
-    try:
-        usuario = request.user
-        id_evento = request.POST.get('evento', None)
-        cantidad = request.POST.get('cantidad', None)
-        evento = Evento.objects.get(id=id_evento)
-        if int(evento.EntradasDisponibles()) < int(cantidad):
-            return JsonResponse({'exito': False, 'mensaje': 'No hay suficientes entradas. Sólo hay ' + str(evento.EntradasDisponibles) + ' entradas disponibles.'})
-        pago = Pago()
-        pago.referencia = uuid.uuid4().hex[:8]
-        medios = Medio_Pago.objects.filter(estatus='A')
-        pago.medio_pago = random.choice(medios)
-        pago.save()
-        entrada = Entrada()
-        entrada.costo = evento.precio
-        entrada.cantidad = cantidad
-        entrada.evento = evento
-        entrada.forma_pago = pago
-        entrada.usuario = usuario
-        entrada.save()
-        return JsonResponse({'exito': True, 'id': str(entrada.id)})
-    except:
-        return JsonResponse({'exito': False, 'mensaje': 'Error desconocido del servidor.'})
+    usuario = request.user
+    id_evento = request.POST.get('evento', None)
+    cantidad = request.POST.get('cantidad', None)
+    evento = Evento.objects.get(id=id_evento)
+    if int(evento.EntradasDisponibles()) < int(cantidad):
+        return JsonResponse({'exito': False, 'mensaje': 'No hay suficientes entradas. Sólo hay ' + str(evento.EntradasDisponibles) + ' entradas disponibles.'})
+    pago = Pago()
+    pago.referencia = uuid.uuid4().hex[:8]
+    medios = Medio_Pago.objects.filter(estatus='A')
+    pago.medio_pago = random.choice(medios)
+    pago.save()
+    entrada = Entrada()
+    entrada.costo = evento.precio
+    entrada.cantidad = cantidad
+    entrada.evento = evento
+    entrada.forma_pago = pago
+    entrada.usuario = usuario
+    entrada.save()
+    for i in range(0,int(cantidad)):
+        asiento = Asiento()
+        asiento.entrada = entrada
+        asiento.fila = random.choice(string.ascii_letters)
+        asiento.numero = random.randint(1,25)
+        asiento.save()
+    return JsonResponse({'exito': True, 'id': str(entrada.id)})
+    # except:
+    #     return JsonResponse({'exito': False, 'mensaje': 'Error desconocido del servidor.'})
